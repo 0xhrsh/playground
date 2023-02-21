@@ -4,8 +4,7 @@
 <body onload="getModelFromURL()">
     <div>
         <model-viewer id="ar_viewer" poster="https://cdn.dribbble.com/users/765253/screenshots/2540865/loader.gif"
-            ar-placement="wall" alt="AR Model" autoplay ar ar-modes="scene-viewer quick-look webxr"
-            shadow-softness="0" environment-image="https://0xhrsh.com/hussain-assets/1.jpg" camera-controls>
+            ar-placement="wall" alt="AR Model" autoplay ar ar-modes="scene-viewer quick-look webxr" camera-controls>
             <button slot="ar-button"
                 style="background-color: #eb6556; border-radius: 5px; border: none; position: absolute; width: 126px; bottom: 10px; left: calc(50% - 63px); margin: auto; display: block;">
                 <p style="color: aliceblue; margin: 0;">View this in AR ✨</p>
@@ -29,11 +28,47 @@
 </style>
 
 <script>
+    function checkIfURLParameterExists(param) {
+        const url = window.location.href;
+        if (url.indexOf('?' + param + '=') != -1)
+            return true;
+        else if (url.indexOf('&' + param + '=') != -1)
+            return true;
+        return false
+    }
     function getModelFromURL() {
+        var modelURL, softness, exposure, envImgURL, skyImgURL;
+
+
         const urlParams = new URLSearchParams(window.location.search);
         const model = urlParams.get('model');
         var modelURL = "https://0xhrsh.com/hussain-assets/" + model + ".glb";
         document.getElementById("ar_viewer").src = modelURL;
+
+        if (checkIfURLParameterExists('ss')) {
+            softness = urlParams.get('ss');
+            document.getElementById("ar_viewer").setAttribute("shadow-softness" = softness);
+        }
+
+        if (checkIfURLParameterExists('env')) {
+            const envImg = urlParams.get('env');
+            envImgURL = "https://0xhrsh.com/hussain-assets/" + envImg + ".jpg"
+        } else {
+            envImgURL = "https://0xhrsh.com/hussain-assets/1.jpg"
+        }
+        document.getElementById("ar_viewer").setAttribute("environment-image" = envImg);
+
+        if (checkIfURLParameterExists('exp')) {
+            exposure = urlParams.get('exp');
+            document.getElementById("ar_viewer").setAttribute("exposure" = exposure);
+        }
+
+        if (checkIfURLParameterExists('sky')) {
+            const skyImg = urlParams.get('sky');
+            skyImgURL = "https://0xhrsh.com/hussain-assets/" + skyImg + ".jpg"
+        }
+        document.getElementById("ar_viewer").setAttribute("skybox-image" = skyImgURL);
+
     }
 </script>
 
