@@ -66,9 +66,8 @@
         if (checkIfURLParameterExists('sky')) {
             const skyImg = urlParams.get('sky');
             skyImgURL = "https://0xhrsh.com/hussain-assets/" + skyImg + ".jpg"
+            document.getElementById("ar_viewer").setAttribute("skybox-image", skyImgURL);
         }
-        document.getElementById("ar_viewer").setAttribute("skybox-image", skyImgURL);
-
     }
 </script>
 
