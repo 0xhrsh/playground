@@ -3,12 +3,10 @@
 
 <body onload="getModelFromURL()">
     <div>
-        <model-viewer id="ar_viewer" poster="https://cdn.dribbble.com/users/765253/screenshots/2540865/loader.gif"
-            alt="AR Model" autoplay ar ar-modes="scene-viewer quick-look webxr" camera-controls>
-            <button slot="ar-button"
-                style="background-color: #eb6556; border-radius: 5px; border: none; position: absolute; width: 126px; bottom: 10px; left: calc(50% - 63px); margin: auto; display: block;">
-                <p style="color: aliceblue; margin: 0;">View this in AR ✨</p>
-            </button>
+        <model-viewer id="ar_viewer" poster="assets/images/loader.gif" alt="AR Model" reveal="auto" autoplay ar
+            exposure="1.5" environment-image="https://0xhrsh.com/hussain-assets/Dsky.jpg"
+            ar-modes="scene-viewer quick-look webxr" camera-controls>
+            <button id="ar-button" class="ar-button" slot="ar-button">Activate AR</button>
         </model-viewer>
     </div>
 </body>
@@ -16,14 +14,43 @@
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 <style>
-    div {
-        height: 50vh;
-        width: 50vw;
+    .ar-button {
+        background-color: #31313a;
+        color: whitesmoke;
+        border: 1px solid #000000;
+        border-radius: 5;
+        width: 200px;
+        height: auto;
+        position: absolute;
+        left: calc(50% - 100px);
+        top: 80vh;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+        z-index: 100;
+
+        transition: all 0.3s ease;
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+    }
+
+    .ar-button:active {
+        transform: scale(0.98);
+        box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+    }
+
+
+    body {
+        margin: 0;
+        overflow: hidden;
     }
 
     model-viewer {
-        height: inherit;
-        width: inherit;
+        width: 100vw;
+        height: 90vh;
     }
 </style>
 
@@ -53,10 +80,8 @@
         if (checkIfURLParameterExists('env')) {
             const envImg = urlParams.get('env');
             envImgURL = "https://0xhrsh.com/hussain-assets/" + envImg + ".jpg"
-        } else {
-            envImgURL = "https://0xhrsh.com/hussain-assets/1.jpg"
+            document.getElementById("ar_viewer").setAttribute("environment-image", envImgURL);
         }
-        document.getElementById("ar_viewer").setAttribute("environment-image", envImgURL);
 
         if (checkIfURLParameterExists('exp')) {
             exposure = urlParams.get('exp');
