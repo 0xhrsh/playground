@@ -7,6 +7,7 @@ function checkIfURLParameterExists(param) {
     return false
 }
 function main() {
+    const BASE_URL = "https://assets.0xhrsh.com/";
     const urlParams = new URLSearchParams(window.location.search);
     var modelURL, softness, exposure, envImgURL, skyImgURL;
 
@@ -14,7 +15,7 @@ function main() {
     if (checkIfURLParameterExists('model')) {
         model = urlParams.get('model');
     }
-    var modelURL = "https://0xhrsh.com/hussain-assets/" + model + ".glb";
+    var modelURL = BASE_URL + '3d/' + model + ".glb";
     document.getElementById("ar_viewer").src = modelURL;
 
     if (checkIfURLParameterExists('ss')) {
@@ -24,7 +25,7 @@ function main() {
 
     if (checkIfURLParameterExists('env')) {
         const envImg = urlParams.get('env');
-        envImgURL = "https://0xhrsh.com/hussain-assets/" + envImg + ".jpg"
+        envImgURL = BASE_URL + 'img/' + envImg + ".jpg"
         document.getElementById("ar_viewer").setAttribute("environment-image", envImgURL);
     }
 
@@ -35,7 +36,7 @@ function main() {
 
     if (checkIfURLParameterExists('sky')) {
         const skyImg = urlParams.get('sky');
-        skyImgURL = "https://0xhrsh.com/hussain-assets/" + skyImg + ".jpg"
+        skyImgURL = BASE_URL + 'img/' + skyImg + ".jpg"
         document.getElementById("ar_viewer").setAttribute("skybox-image", skyImgURL);
     }
 }
