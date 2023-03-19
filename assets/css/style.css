@@ -1,0 +1,38 @@
+.ar-button{
+    background-color: #31313a;
+    color: whitesmoke;
+    border: 1px solid #000000;
+    border-radius: 5;
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: calc(50% - 100px);
+    top: 80vh;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+    z-index: 100;
+    
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+}
+
+.ar-button:active {
+    transform: scale(0.98);
+    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
+
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+model-viewer {
+    width: 100vw;
+    height: 90vh;
+}

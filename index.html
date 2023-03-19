@@ -1,99 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<body onload="getModelFromURL()">
-    <div>
-        <model-viewer id="ar_viewer" poster="assets/images/loader.gif" alt="AR Model" reveal="auto" autoplay ar
-            exposure="1.5" environment-image="https://0xhrsh.com/hussain-assets/Dsky.jpg"
-            ar-modes="scene-viewer quick-look webxr" camera-controls>
-            <button id="ar-button" class="ar-button" slot="ar-button">Activate AR</button>
-        </model-viewer>
-    </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hrsh's playGround</title>
+</head>
+
+<link rel="stylesheet" href="assets/css/style.css">
+
+<body onload="main()">
+    <model-viewer id="ar_viewer" poster="assets/images/loader.gif" alt="AR Model" reveal="auto" autoplay ar
+        exposure="1.5" environment-image="https://0xhrsh.com/hussain-assets/Dsky.jpg"
+        ar-modes="scene-viewer quick-look webxr" camera-controls>
+        <button id="ar-button" class="ar-button" slot="ar-button">Activate AR</button>
+    </model-viewer>
 </body>
 
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-
-<style>
-    .ar-button {
-        background-color: #31313a;
-        color: whitesmoke;
-        border: 1px solid #000000;
-        border-radius: 5;
-        width: 200px;
-        height: auto;
-        position: absolute;
-        left: calc(50% - 100px);
-        top: 80vh;
-        padding: 10px 20px;
-        font-size: 16px;
-        border-radius: 5px;
-        box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
-        z-index: 100;
-
-        transition: all 0.3s ease;
-        -webkit-transition: all 0.3s ease;
-        -moz-transition: all 0.3s ease;
-        -o-transition: all 0.3s ease;
-        -ms-transition: all 0.3s ease;
-    }
-
-    .ar-button:active {
-        transform: scale(0.98);
-        box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
-    }
-
-
-    body {
-        margin: 0;
-        overflow: hidden;
-    }
-
-    model-viewer {
-        width: 100vw;
-        height: 90vh;
-    }
-</style>
-
-<script>
-    function checkIfURLParameterExists(param) {
-        const url = window.location.href;
-        if (url.indexOf('?' + param + '=') != -1)
-            return true;
-        else if (url.indexOf('&' + param + '=') != -1)
-            return true;
-        return false
-    }
-    function getModelFromURL() {
-        var modelURL, softness, exposure, envImgURL, skyImgURL;
-
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const model = urlParams.get('model');
-        var modelURL = "https://0xhrsh.com/hussain-assets/" + model + ".glb";
-        document.getElementById("ar_viewer").src = modelURL;
-
-        if (checkIfURLParameterExists('ss')) {
-            softness = urlParams.get('ss');
-            document.getElementById("ar_viewer").setAttribute("shadow-softness", softness);
-        }
-
-        if (checkIfURLParameterExists('env')) {
-            const envImg = urlParams.get('env');
-            envImgURL = "https://0xhrsh.com/hussain-assets/" + envImg + ".jpg"
-            document.getElementById("ar_viewer").setAttribute("environment-image", envImgURL);
-        }
-
-        if (checkIfURLParameterExists('exp')) {
-            exposure = urlParams.get('exp');
-            document.getElementById("ar_viewer").setAttribute("exposure", exposure);
-        }
-
-        if (checkIfURLParameterExists('sky')) {
-            const skyImg = urlParams.get('sky');
-            skyImgURL = "https://0xhrsh.com/hussain-assets/" + skyImg + ".jpg"
-            document.getElementById("ar_viewer").setAttribute("skybox-image", skyImgURL);
-        }
-    }
-</script>
+<script src="assets/js/index.js"></script>
 
 </html>
